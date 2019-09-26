@@ -1,0 +1,56 @@
+div{
+	margin: 1%;
+}
+
+
+ul li{
+	/*display: block;*/
+	text-decoration: none;
+	margin: 1%;
+}
+
+#first img{
+	width: 10vw;
+	float: right;
+	/*height: 10vh;*/
+	margin-right: 2%;
+	margin-bottom: 2%;
+}
+
+#cam{
+	float: right;
+	margin: 0 1% 0 3%;
+}
+
+#famille{
+	margin-top: 2%;
+}
+#famille img{
+	float: right;
+	width: 35vw;
+	margin: 0 2%;
+}
+#famille #left{
+	float: left;
+}
+dt{
+	font-size: 24px;
+}
+
+#posts img{
+	width: 6vw;
+	float: left;
+	margin: 1%;
+}
+#posts #right{
+	position: absolute;
+	margin-left: 52%;
+}
+#posts dt{
+	margin: 5% 0 0 2%;
+}
+
+#end{
+	font-size: 25px;
+	margin: 5% 6%;
+}

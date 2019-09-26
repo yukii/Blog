@@ -1,0 +1,42 @@
+div{
+	margin: 0 1%;
+}
+
+h3{
+	text-align: center;
+}
+
+#myPrez{
+	margin-left: 20%;
+
+}
+ul li{
+	display: block;
+	text-decoration: none;
+}
+
+#presentation{
+	padding: 1% 1% 0 1%;
+}
+#presentation h3{
+	text-align: justify;
+	text-decoration: underline;
+	margin-left: 10%;
+}
+#presentation img{
+	width: 15vw;
+	float: left;
+	margin-right: 20px;
+}
+/*#right {
+	float: right;
+}*/
+dt{
+	font-size: 24px;
+}
+
+#seek{
+	margin-left: 12%;
+	width: 75vw;
+	/*height: 50vh;*/
+}

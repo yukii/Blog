@@ -1,0 +1,85 @@
+html, body{
+	/*width: 100%;*/
+	height: 100%;
+	margin: 0 1%;
+	padding: 0;
+	letter-spacing: 1px;
+	font-family: 'Livvic', sans-serif;
+	/*font-size: 12px;*/
+}
+
+header h1{
+	/*width: 100vw;*/
+	height: 15%;
+	margin: 0;
+	padding: 3% 4%;
+	text-align: center;
+	/*background: blue;*/
+}
+header img{
+	margin: 1% 1% 0 2%;
+}
+
+header img{
+	width: 6vw;
+	height: 15vh;
+}
+header #ynov{
+	height: 12vh;
+	width: 12vw;
+	float: right;
+	/*margin-right: 1%;*/
+}
+
+
+nav{
+	width: 100%;
+	margin-bottom: 7%;
+	margin-left: 10%;
+}
+/*nav	ul{
+	background: blue;
+}*/
+nav ul li{
+	display: block;
+	float: left;
+	list-style: none;
+	margin: 2% 15%;
+	/*color: black;*/
+	text-decoration: none;
+}
+nav ul li a{
+	text-decoration: none;
+
+
+}
+
+p{
+	text-indent: 10%;
+}
+
+a{
+	text-decoration: none;
+}
+a:link {
+    color: #007DB7;
+}
+/* visited link */
+a:visited {
+    color: #007DB7;
+}
+/* mouse over link */
+a:hover {
+    color: #00B9E8;
+}
+/* selected link */
+a:active {
+    color: #00B9E8;
+}
+
+footer{
+	height: 10vh;
+	float: bottom;
+	margin-top: 1%;
+	text-align: center;
+}

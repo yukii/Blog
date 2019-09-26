@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="Description" content="Rapport de stage sous forme de blog">
+	<meta name="author" lang="fr" content="Mari-Annaig">
+	<meta name="robots" content="index, follow">
+	<!-- rajouter des balises meta -->
+	<link rel="stylesheet" type="text/css" href="../css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../css/stage.css">
+	<title>Blog - Rapport de stage 2ème année</title>
+</head>
+<body>
+	<header>
+		<a href="https://www.armogaste.com"><img src="../images/armogaste.png"></a>
+		<a href="https://www.ynov.com/formation/ynov-informatique/"><img id="ynov" src="../images/ynov.png"></a>
+		<h1>Stage 2ème année</h1>
+	</header>
+	<hr>
+	<nav>
+		<ul>
+			<a href="../index.html"><li>Acceuil</li></a>
+			<!-- posts -->
+			<a href="#"><li>Mon stage</li></a>
+		</ul>
+	</nav>
+	<hr>
+	<br>
+
+	<!-- faire un peu de SEO -->
+	<div id="all">
+		<div id="first">
+			<img id="unity" src="../images/unity.svg.png">
+			<img id="cSharp" src="../images/cSharp.png">
+			<p>Lorsque je suis arrivée, on m'a passé le projet. C'était un projet qui était déjà en cours de développement lorsque je suis arrivée. Il était développé sous Unity, un logiciel qui sert à faire des jeux vidéo communément appelé : moteur de jeux vidéo. Le langage utilisé est le C#. On m'a dit qu'il y avait déjà au moins 2 développeurs qui était passé dessus, qui ont fait les scripts. Je me suis plongée dans les scripts qui avaient déjà été faits. Il y en avait beaucoup ! J'essayais de comprendre ce qu'il faisait à l'aide des commentaires laissés par mes prédécesseurs et de mes connaissances. Une fois que j'avais saisi ce que faisait la majorité des scripts je me suis mise au boulot.</p>
+
+		</div>
+		<br>
+		<br>
+		<br>
+		
+		<h3>1ère mission : Vérifier si tout fonctionne bien</h3>
+		<div id="posts">
+			<p>Un de mes prédécesseurs m'avait laissé une liste de choses à faire dans la continuité de ce qu'il avait fait. Pour mieux saisir ce qu'il fallait faire, j'ai décidé de lancer le projet. Il y avait un peu de latence sur certaines actions que l'on faisait : par exemple lorsqu'on appuyait sur la gachette pour tirer, entre le moment où l'on enfonce la gachette et le moment où le vaisseau tire il y avait presque 1 seconde. Ce petit moment de latence, il fallait le supprimer ! J'ai donc commencé par chercher pourquoi il était là. Heureusement, j'ai pu trouver rapidement. </p>
+			<!-- trouver un screen de tir -->
+
+			<p>Tout d'abord il faut savoir que sous Unity chaque objet créé peut avoir un script attaché. Ce script lorsqu'il est attaché à un objet, est ce qui oblige l'objet à faire une action. Dans Seek the Stars, lors de la phase de combat, chaque vaisseau est un objet auquel des scripts sont rattachés. Or dans certains de ces scripts, on controllait tous les vaisseaux. C'est cela qui causait la latence. J'ai donc corrigé les scripts qui causait les latences, j'en ai profité pour enlever les lignes de code qui ne servaient à rien (avec l'accord de Loic qui m'aidait).</p>
+
+			<p>J'ai vérifié si les latences avaient disparus avant de me lancer sur la mission suivante. Les latences avaient disparus ! Une bonne nouvelle ! Passons à la suite ....</p>
+
+		</div>
+		
+		<div id="posts">
+			<p>Ensuite j'ai vérifié que l'on pouvait jouer avec tous les vaisseaux. Il manquait les prefab de certains vaisseaux. Il était noté dans la documentation de mon prédécesseur qu'il pouvait en manquer, il fallait donc les rajouter. Il était aussi noté que les sprites des vaisseaux n'étaient pas forcément ceux qui correspondait. J'ai du vérifié que ces deux points et les rectifiés en fonction des vaisseaux. Ce fut un long.... Il y a 84 vaisseaux à vérifier... Heureusement je n'ai pas eu à lançer le jeu pour chaque vaisseau ! On utilise des scriptables pour nous simplifier le travail. Les scriptables sont des scripts contenant toutes les informations d'un objet (ici : les vaisseaux). J'ai vérifié que les sprites et les prefab soit les bons à l'aide de la documentation que m'avait fourni Matthias.</p>
+
+			<p>Jusqu'à présent les tests ne se faisait qu'avec un seul joueur, j'ai donc vérifié si l'on pouvait jouer avec plusieurs joueurs (au moins 2). Armée d'une manette et d'un clavier, je me suis attelée à la tâche. On utilise un plugin qui s'appelle Rewired qui permet de centraliser tous les inputs (clavier/souris et manette). J'ai repéré dans le script où on affectait à chaque joueur une manette ou le clavier. Je lance le jeu. Le clavier et la manette était tous les deux affectés au premier joueur. Il a fallu que je change l'affectation du clavier. Je l'ai fait comme suis : si le premier joueur appuie sur "Start" avec la manette alors le clavier est affecté au dernier (4ème) joueur et inversement.</p>
+
+		</div>
+		<br>
+		<br>
+
+		<h3>2ème mission : la caméra</h3>
+		<img id="cam" src="../images/camera.png">
+		<div id="posts">
+			<p>Le champ de bataille était infini, le mouvement de la camera est fait de tel sorte qu'on puisse avoir tout les vaisseaux sur l'écran, mais ce n'était pas ce que voulais Armogaste. Il voulait un champ de bataille fini où l'on pouvait voir le bord. Il y avait un système de téléportation déjà implémenter mais qu'on a supprimé parce qu'il ne fonctionnait pas très bien. Maintenant que le champ de bataille n'est plus infini, il fallait empêcher la caméra d'aller trop loin, lui imposer des limites. J'ai commencé par mettre les valeurs au dela desquelles la caméra ne devrait aller. Puis j'ai mis en place des zoom, à partir de la distance des vaisseaux.</p>
+
+		</div>
+		<br>
+		<br>
+
+		<h3>3ème mission : Implémenter la phase de combat</h3>
+		<div id="posts">
+			<p> Maintenant que j'ai mes vaisseaux prêts et une caméra opérationnelle, je peux les faire combattre. Les vaisseaux peuvent combattre, tirer, ils ont une cadence de tir et on peut voir leur barre de vie et leur barre de tir (cadence de tir).
+			<br>
+			Les choses que j'avais à faire :
+			<ul>
+				<li>Améliorer les mouvements</li>
+				<li>Implémenter les bonus liés au commandeur choisi</li>
+				<li>Implémenter les bonus liés aux vaisseaux choisis</li>
+				<li>L'apparition d'un nouveau vaisseau lorsque le précédent est détruit</li>
+			</ul>
+			</p>
+
+			<p>Concernant les mouvements des vaisseaux, il fallait rajouter de l'inertie pour faire un peu plus réaliste mais il fallait pas en avoir beaucoup pour ne pas être injouable. J'ai tout d'abord rajouter l'accélération du vaisseau dans le script puis j'ai demandé de l'aide à Loic pour faire l'inertie. Une fois cela fait, John a testé le jeu pour pouvoir refaire la balance des vaisseaux. Il m'a demandé où il pouvait changer les statistiques de chaque vaisseau puis il m'a demandé à quoi correspondait chaque nom de stats et quelle influence elles avaient dans les scripts. J'ai répondu du mieux que je pouvais à ses questions. A partir des réponses que je lui donnait à propos des statistiques des vaisseaux, il pouvait en établir de nouvelles. L'amélioration du script pour les mouvements des vaisseaux est un succès.</p>
+
+			<!-- montrer les mouvements -->
+		</div>
+
+		<div>
+			<p>Matthias m'a donné un excel avec tout les spéciaux de chaque famille de vaisseaux, il y en a 12 au total. Aucun n'était implémenté. Il fallait que j'implémente chaque pouvoir spécial ainsi que leur cooldown.</p>
+
+			<p>Détails des spéciaux par famille, chacun d'eux ne dure que quelques secondes :</p>
+			<dl id="famille">
+				<img src="../images/Arciani.png">
+				<dt>Famille Arciani</dt>
+				<dd>Leurs vaisseaux lance un drone qui va pousuivre le vaisseau le plus proche tout en lui tirant dessus. Leur pouvoir spécial n'est pas compliqué à mettre en place mais il y a eu quelques bug. Parmi les bug que j'ai pu rencontré il y avait notemment que le drone ne se détruisait pas et restait inactif sur le terrain. Ce qui causait ce bug était une ligne de code mal placé. Concernant sa destuction, il y avait aussi le fait qu'il restait inactif sur le terrain lorsque le vaisseau était détruit.</dd>
+
+				<br>
+				<br>
+				<img id="left" src="../images/Darkl.png">
+				<dt>Famille Darkl</dt>
+				<dd>Leurs vaisseaux peuvent se rendre invisible. Je n'ai pas eu de problèmes avec celui ci. Le principe était simple : lorsqu'on était invisible, on ignorait les dégats mais si on tirait, on redevenait vulnérable. </dd>
+
+				<br>
+				<br>
+				<br>
+				<dt>Famille Dornions</dt>
+				<img src="../images/Dornions.png">
+				<dd>Leurs vaisseaux peuvent déployer un bouclier autour d'eux et dévié les tirs. Plus compliqué que les autres à mettre en place. Je ne savais pas trop comment faire et Loic ne pouvait pas m'aider à ce moment là. Finalement ça a été changé pour qu'il soit plus simple à mettre en place en gardant un effet qui convenait à Matthias : le bouclier emmagasinerait des dégats pour les renvoyer sur le vaisseau le plus proche. Ce fut plus simple à faire mais il y eu un petit problème : le bouclier apparaissait plusieurs fois ... J'ai mis un peu de temps avant de savoir ce qu'il se passait... C'était un boolean qui était mal placé....</dd>
+
+				<br>
+				<img id="left" src="../images/Ephreti.png">
+				<dt>Famille Ephreti</dt>
+				<dd>Leurs vaisseaux peuvent "revenir dans le temps". Ils reviennent à leur position où ils étaient 3 secondes au paravant avec le même nombre de points de vie qu'ils avaient à ce moment. Ce pouvoir spécial était un peu difficile à faire puisqu'il fallait garder en mémoire la position et le nombre de point de vie constemment.</dd>
+
+				<br>
+				<br>
+				<dt>Famille Garciake</dt>
+				<img src="../images/Garciake.png">
+				<dd>Leurs vaisseaux envoient une petite navette sur les vaisseaux proches afin de leur faire un peu de dégats et de les empêcher d'utiliser leur pouvoir spécial. Pour celui ci, j'ai du modifié tous les scripts des pouvoirs spéciaux, ce fut long mais par très compliqué à faire. Malheureusement, ici aussi, la navette ne voulait pas disparaitre quand je voulais. Il a fallu que je change un peu quelques scripts pour arriver à faire ce que je voulais.</dd>
+
+				<br>
+				<br>
+				<img id="left" src="../images/Garindar.png">
+				<dt>Famille Garindar</dt>
+				<dd>Leurs vaisseaux pouvaient drainer l'énergie du vaisseau le plus proche. Le plus dur a été de savoir combien le vaisseau pouvait drainer de points de vie. Si c'était un nombre c'était facile mais si c'était un pourcentage (comme ici) il fallait savoir si c'était de la vie maximum ou celle à l'instant t.</dd>
+
+				<br>
+				<br>
+				<dt>Famille Karshick</dt>
+				<img src="../images/Karshick.png">
+				<dd>leurs vaisseaux sacrifiaient des points pour pouvoir tirer plus vite mais ils pouvaient se regénérer lorsque leur pouvoir spécial n'était pas activé. Cette famille était un peu spéciale puisqu'il fallait implémenter un pouvoir passif et un pouvoir actif. Le plus dur a été de trouver un juste milieu entre les nombres de points de vie qu'ils pouvaient regagner et ceux qu'ils pouvaient perdre. Heureusement, John était là pour m'aider avec son tableau de statistiques.</dd>
+
+				<br>
+				<br>
+				<br>
+				<img id="left" src="../images/Myadar.png">
+				<dt>Famille Myadar</dt>
+				<dd>Leurs vaisseaux immobilisaient le vaisseau le plus proche. Le plus dur a été de rendre la mobilité au vaisseau immobilisé.</dd>
+
+				<br>
+				<br>
+				<br>
+				<img src="../images/Sym.png">
+				<dt>Famille Sym</dt>
+				<dd>Leurs vaisseaux lançaient une sonde puis se téléportait à sa place. Ce pouvoir spécial se passait en 2 fois : on l'activait une première fois pour lancer la sonde puis une deuxième pour se téléporter à la position de cette dernière.</dd>
+
+				<br>
+				<br>
+				<br>
+				<img id="left" src="../images/Ukares.png">
+				<dt>Famille Ukares</dt>
+				<dd>Leurs vaisseaux peuvent se regénérer quand on leurs tire dessus ou lorsqu'ils rentrent en collision avec d'autre vaisseau. J'ai du modifié le script qui gérait les points de vie et tout fonctinnait correctement sans aucun bug.</dd>
+
+				<br>
+				<br>
+				<br>
+				<img src="../images/Urnans.png">
+				<dt>Famille Urnans</dt>
+				<dd>Leurs vaisseaux pouvaient accéléré et faisaient plus de dégats lorsqu'ils rentraient dans les autres. La seule difficulté que j'ai rencontré à été de leur rendre leur stats précédentes.</dd>
+
+				<br>
+				<br>
+				<br>
+				<img id="left" src="../images/Zyrnions.png">
+				<dt>Famille Zyrnions</dt>
+				<dd>Leurs vaisseaux pouvaient s'auto-détruire et leur cadence de tir s'accélérait. Pour ce pouvoir spécial, il a fallu trouver le bon nombre de dégat à infliger aux vaisseaux proches : il fallait beaucoup de dégats (puisqu'on se suicidait) mais pas trop pour garder un équilibre avec les autres. </dd>
+			</dl>
+		</div>
+
+		<br>
+		<br>
+		<div id="posts">
+			<p>Ensuite, j'ai continué avec les bonus qu'apportaient les commandeurs choisis. Matthias et John m'ont expliqué ce que faisaient chaque bonus et à quel commandeur il s'appliquait.</p>
+			<p>Le plus dur avec les bonus des commandeurs c'est qu'il a fallu que je modifie beaucoup de scripts.... Quelques bugs sont apparus suite à ça mais j'ai pu les résoudre rapidement.</p>
+			
+			<p>Détails des bonus par commandeur :</p>
+			<dl>
+				<div>
+				<img src="../images/Felicia.png">
+				<dt>Felicia Urnans</dt>
+				<dd>Chacun de ses vaisseaux fait plus de dégats (+5%).</dd></div>
+
+				<br>
+				<div id="right">
+				<img src="../images/Aeris.png">
+				<dt>Aeris Urnans</dt>
+				<dd>Chacun de ses vaisseaux gagne 5% de points de vie.</dd></div>
+
+				<br>
+				<div>
+				<img src="../images/Avikhan.png">
+				<dt>Avikhan de Zyrnions</dt>
+				<dd>Le joueur gagne 5% de points pour composer sa flotte.</dd></div>
+				
+				<br>
+				<div id="right">
+				<img src="../images/Elena.png">
+				<dt>Elena de Zyrnions</dt>
+				<dd>Chacun de ses vaisseaux gagne 5% d'accélération, sur la vitesse et sur la vitesse de rotation.</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Irima.png">
+				<dt>Irima de Karshick</dt>
+				<dd>Chacun de ses vaisseaux peut de regénérer.</dd></div>
+				
+				<br>
+				<div id="right">
+				<img src="../images/Elwyn.png">
+				<dt>Elwyn</dt>
+				<dd>Chacun de ses vaisseaux a une réduction de 5% sur le cooldown de leur pouvoir spécial.</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Bart.png">
+				<dt>Bartolomeo</dt>
+				<dd>Chacun de ses vaisseaux gagne 5% de cadence de tir.</dd></div>
+				
+				<br>
+				<div id="right">
+				<img src="../images/Betty.png">
+				<dt>Betty Golden Hands</dt>
+				<dd>Les autres joueurs perdent 5% de leurs points pour composer leur flotte.</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Eva.png">
+				<dt>Eva</dt>
+				<dd>Chacun de ses vaisseaux gagne 5% sur leur vitesse.</dd></div>
+				
+				<br>
+				<div id="right">
+				<img src="../images/Spike.png">
+				<dt>Spike</dt>
+				<dd>Chacun des vaisseaux adverse a une augmentation de 5% sur leur cooldown de leur pouvoir spécial.</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Khaldros.png">
+				<dt>Khaldros de Mintaer</dt>
+				<dd>Tout d'abord il devait révéler les informations des vaisseaux ennemis <br> mais on ne joue que sur un écran donc on en voyait l'utilité. <br> Le bonus a changé suite à une discussion avec l'équipe. <br> Le nouveau bonus : lorsqu'on a moins de 25% de points de vie alors on fait plus de dégâts.</dd></div>
+				
+				<br>
+				<div id="right">
+				<img src="../images/Arkin.png">
+				<dt>Empeureur Arkin de Dornions</dt>
+				<dd>Le joueur a un vaisseau en plus, le vaisseau impérial.</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Akina.png">
+				<dt>A'Kina d'Ephreti</dt>
+				<dd>Lorsqu'un vaisseau est détruit, <br> il a 10% d'être réssucité avec tous ses points de vie.</dd></div>
+				
+				<br>
+				<div id="right">
+				<img src="../images/Zulnar.png">
+				<dt>Zul'Nar d'Ephreti</dt>
+				<dd>Chacun de ses vaisseaux avaient 5% de chances d'immobiliser un vaisseau lorsqu'il le touchait</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Samia.png">
+				<dt>Samia</dt>
+				<dd>Elle n'a pas de bonus, elle en prend un au hasard.</dd></div>
+				
+				<br>
+				<div>
+				<img src="../images/Daliah.png">
+				<dt>Daliah d'Ukares</dt>
+				<dd>chacun de ses vaisseaux a 5% d'ignorer les dégats subis.</dd></div>
+
+			</dl>
+
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div id="posts">
+			<p>Une fois tous les bonus et pouvoirs spéciaux faits, je vais m'attaquer à l'apparition du nouveau vaisseau. Il faut d'abord que j'arrive à trouver le script qui gère les apparitions des vaisseaux, le script qui gère les points de vie (celui là était facile à trouver) et celui où la liste des vaisseaux du joueur est stockée. Le premier est un peu difficile à trouver, il n'avait pas de commentaires disant ce qu'il faisait.... (Les commentaires c'est important !). Tandis que le troisième était plus simple à trouver puisqu'ils ont regroupé toutes les informations relatifs au joueur dans un seul script. Dans un premier temps, il a fallu que je comprenne comment fonctionnait le script de spawn. Il fut difficile à comprendre mais une fois compris le reste du travail était plus simple.</p>
+			<p>Pour permettre un nouveau vaisseau d'apparaitre, il fallait déjà que le précédent soit mort, ses points de vie étant à 0 ou moins. Ensuite il fallait enlever le vaisseau précédent de la liste des vaisseaus actifs dans le script de la caméra sinon on a une erreur. Puis il fallait incrémenter la liste de 1 pour avoir le vaisseau suivant et enfin le faire apparaître. Le script de spwan ne faisant apparaître que le premier vaisseau, j'ai du rajouter une fonction pour pouvoir l'appeler à partir du script qui gérait les points de vie. Une fois fait, je l'ai testé. Tout fonctionnait bien sur mon PC mais sur celui de Matthias il arrivait que ce soit deux vaisseaux ou plus qui apparaissaient en même temps. Je n'ai pas pu résoudre ce bug par manque de temps.</p>
+		</div>
+	</div>
+
+	<div id="end">
+		Ceci conclu la fin de mon stage qui aura duré presque 2mois ! Merci beaucoup à Armogaste pour m'avoir pris en stage !!
+	</div>
+	<footer>
+		<!-- mes coordonnées.... -->
+		Ingesup 2018-2019
+		<br>
+		<a href="commentaire.php">Laissez un peu petit commentaire :D</a>
+	</footer>
+</body>
+</html>

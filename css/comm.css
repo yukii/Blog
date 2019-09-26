@@ -1,0 +1,14 @@
+div{
+	margin-left: 1%;
+}
+
+#my_img{
+	/*position: fixed;*/
+	float: right;
+	width: 45vw;
+}
+
+#ecrit #coms{
+	width: 25vw;
+	height: 20vh;
+}

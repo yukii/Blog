@@ -1,0 +1,18 @@
+article, h3{
+	margin: 0 1%;
+}
+
+article{
+	
+}
+div{
+	/*letter-spacing: 1px;*/
+}
+
+#graal{
+	float: right;
+}
+
+#coffee{
+	width: 2vw;
+}
